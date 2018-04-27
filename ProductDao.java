@@ -2,7 +2,7 @@ package kr.ac.jejunu;
 
 import java.sql.*;
 
-public class ProductDao {
+public abstract class ProductDao {
     public Product get(Long id) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/jeju?characterEncoding=UTF-8", "jeju", "MyNewPass");
@@ -14,11 +14,10 @@ public class ProductDao {
         resultSet.next();
 
         Product product = new Product();
-        product.setId(resultSet.getLong("id"));
-        product.setTitle(resultSet.getString("title"));
-        product.setPrice(resultSet.getInt("price"));
+        product.setId(resultSet.getLong("id"));//id
+        product.setTitle(resultSet.getString("title"));//name
+        product.setPrice(resultSet.getInt("price"));//pass
 
-        //자원을 해지한다.
         resultSet.close();
         preparedStatement.close();
         connection.close();
@@ -28,7 +27,7 @@ public class ProductDao {
     public Long add(Product product) throws ClassNotFoundException, SQLException {
                 Connection connection = getConnection();
 
-                PreparedStatement preparedStatement = connection.prepareStatement("insert into productinfo(title, price) VALUES (?,?)");
+                PreparedStatement preparedStatement = connection.prepareStatement("insert into product(title, price) VALUES (?,?)");
                 preparedStatement.setString(1, product.getTitle());
                 preparedStatement.setInt(2, product.getPrice());
                 preparedStatement.executeUpdate();
@@ -45,8 +44,12 @@ public class ProductDao {
                         return id;
             }
 
-            private Connection getConnection() throws ClassNotFoundException, SQLException {
+/*          private Connection getConnection() throws ClassNotFoundException, SQLException {
                 Class.forName("com.mysql.jdbc.Driver");
                 return DriverManager.getConnection("jdbc:mysql://localhost/jeju?characterEncoding=utf-8", "jeju", "MyNewPass");
-            }
+            }*/
+            abstract public Connection getConnection() throws ClassNotFoundException, SQLException;
+        //        Class.forName("com.mysql.jdbc.Driver");
+        //        return DriverManager.getConnection("jdbc:mysql://localhost/jeju?characterEncoding=utf-8"
+        //                , "jeju", "MyNewPass");
 }
