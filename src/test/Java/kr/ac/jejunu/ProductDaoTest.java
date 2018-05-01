@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertEquals;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class ProductDaoTest {
 
@@ -15,8 +17,8 @@ public class ProductDaoTest {
 
     @Before
     public void setup() {
-        daoFactory = new DaoFactory();
-        productDao = daoFactory.getProductDao();
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(DaoFactory.class);
+        productDao = applicationContext.getBean("productDao", ProductDao.class);
     }
 
 
@@ -57,26 +59,4 @@ public class ProductDaoTest {
         assertThat(id, is(resultUser.getId()));
         assertThat(price, is(resultUser.getPrice()));
     }
-/*
-    @Test
-    public void hallaGet() throws SQLException, ClassNotFoundException {
-        Long id= 1L;
-        Product product = hallaProductDao.get(id);
-        assertThat(product.getId(), is(1L));
-        assertThat(product.getTitle(), is("제주감귤"));
-        assertThat(product.getPrice(), is(15000));
-        }
-
-        @Test
-        public void hallaAdd() throws SQLException, ClassNotFoundException {
-        Product product = new Product();
-        product.setTitle("바나나");
-        product.setPrice(1800);
-        Long id = hallaProductDao.add(product);
-
-        Product insertedProduct = hallaProductDao.get(id);
-        assertThat(insertedProduct.getId(), is(id));
-        assertThat(insertedProduct.getTitle(), is(product.getTitle()));
-        assertThat(insertedProduct.getPrice(), is(product.getPrice()));
-    }*/
 }
