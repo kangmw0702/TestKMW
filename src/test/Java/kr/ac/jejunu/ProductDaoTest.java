@@ -1,5 +1,5 @@
 package kr.ac.jejunu;
-//
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
@@ -12,12 +12,11 @@ import static org.junit.Assert.assertEquals;
 public class ProductDaoTest {
 
     private ProductDao productDao;
-    private ProductDao hallaProductDao;
+   // private ProductDao hallaProductDao;
 
     @Before
     public void setup() {
-        productDao = new JejuProductDao();
-        hallaProductDao = new HallaProductDao();
+        productDao = new ProductDao();
     }
 
 
@@ -58,7 +57,7 @@ public class ProductDaoTest {
         assertThat(id, is(resultUser.getId()));
         assertThat(price, is(resultUser.getPrice()));
     }
-
+/*
     @Test
     public void hallaGet() throws SQLException, ClassNotFoundException {
         Long id= 1L;
@@ -79,5 +78,5 @@ public class ProductDaoTest {
         assertThat(insertedProduct.getId(), is(id));
         assertThat(insertedProduct.getTitle(), is(product.getTitle()));
         assertThat(insertedProduct.getPrice(), is(product.getPrice()));
-    }
+    }*/
 }
