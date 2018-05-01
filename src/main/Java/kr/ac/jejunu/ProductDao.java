@@ -3,7 +3,12 @@ package kr.ac.jejunu;
 import java.sql.*;
 
 public class ProductDao {
-    private final ConnectionMaker connectionMaker = new JejuConnectionMaker();
+    private final ConnectionMaker connectionMaker;
+
+    public ProductDao(ConnectionMaker connectionMaker) {
+        this.connectionMaker = connectionMaker;
+    }
+
     public Product get(Long id) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection = connectionMaker.getConnection();
@@ -45,13 +50,4 @@ public class ProductDao {
 
         return id;
         }
-
-/*          private Connection getConnection() throws ClassNotFoundException, SQLException {
-                Class.forName("com.mysql.jdbc.Driver");
-                return DriverManager.getConnection("jdbc:mysql://localhost/jeju?characterEncoding=utf-8", "jeju", "MyNewPass");
-            }*/
-        //   abstract public Connection getConnection() throws ClassNotFoundException, SQLException;
-        //        Class.forName("com.mysql.jdbc.Driver");
-        //        return DriverManager.getConnection("jdbc:mysql://localhost/jeju?characterEncoding=utf-8"
-        //                , "jeju", "MyNewPass");
 }

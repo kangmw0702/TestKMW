@@ -2,7 +2,6 @@ package kr.ac.jejunu;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert;
 import java.sql.SQLException;
 
 import static org.hamcrest.MatcherAssert.*;
@@ -12,11 +11,12 @@ import static org.junit.Assert.assertEquals;
 public class ProductDaoTest {
 
     private ProductDao productDao;
-   // private ProductDao hallaProductDao;
+    private DaoFactory daoFactory;
 
     @Before
     public void setup() {
-        productDao = new ProductDao();
+        daoFactory = new DaoFactory();
+        productDao = daoFactory.getProductDao();
     }
 
 
