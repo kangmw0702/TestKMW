@@ -9,6 +9,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertEquals;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class ProductDaoTest {
 
@@ -56,7 +57,7 @@ public class ProductDaoTest {
         Long id = productDao.add(product);
         Product resultUser = productDao.get(id);
         assertThat(id, is(resultUser.getId()));
-        assertThat(id, is(resultUser.getId()));
+        assertThat(title, is(resultUser.getTitle()));
         assertThat(price, is(resultUser.getPrice()));
     }
 }

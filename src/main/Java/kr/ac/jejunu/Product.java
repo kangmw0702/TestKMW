@@ -19,11 +19,7 @@ public class Product {
 
     public void setTitle(String title) { this.title = title; }
 
-    public Integer getPrice() {
-        return price;
-    }
+    public Integer getPrice() { return price; }
 
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
+    public void setPrice(Integer price) { this.price = price; }
 }
